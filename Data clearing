@@ -1,0 +1,20 @@
+import pandas
+
+data = pandas.read_csv(r"D:\Python\Work\Calc\K-DSP PA(08-15).csv")
+
+data_Comment = []
+data_designator = []
+
+for a in data.Comment:
+    data_Comment.append(str(a))
+    
+for a in data.Designator:
+    data_designator.append(str(a))
+    
+data_quantity = [x for x in data.Quantity]
+new_designator = [x[0:3] for x in data.Designator]
+
+data_together = [data_Comment[x] + " " + new_designator[x] for x in range(len(new_designator))]
+
+df = pandas.DataFrame(data_together + data_quantity)
+df.to_csv("new_data.csv")
